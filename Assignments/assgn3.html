@@ -1,0 +1,128 @@
+<html>
+<head>
+    <title>
+        Carlos D. - Student Webpage - Assignment 3
+    </title>
+    <link rel="stylesheet" href="./../styles.css">
+</head>
+<body>
+    <div align="center">
+        <h2>
+            Carlos A. Diaz
+        </h2>
+        <h3>
+            <a href="./../index.html">Home</a>
+            <br><br>
+            <a href="./../AssignmentSplash.html">Assignments</a>
+            <br><br><br>
+            Assignment 3
+        </h3>
+    </div>
+    <h4>
+        Word Guesser
+    </h4>
+    <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic; background-color: #0f140f"># ENTER WORD TO BE GUESSED HERE</span>
+<span style="color: #ffffff">WORD_PERMANENT</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&quot;Internet&quot;</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># storing mutable and lowercased version of word</span>
+<span style="color: #ffffff">word</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">WORD_PERMANENT.lower()</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># declare set for guessed letters</span>
+<span style="color: #ffffff">guessedLetters</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">set()</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># run until break</span>
+<span style="color: #fb660a; font-weight: bold">while</span> <span style="color: #ffffff">True:</span>
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># collect user input</span>
+    <span style="color: #ffffff">letter</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">input(</span><span style="color: #0086d2">&#39;Guess a letter: &#39;</span><span style="color: #ffffff">)</span>
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># try, assuming a single letter was input</span>
+    <span style="color: #fb660a; font-weight: bold">try</span><span style="color: #ffffff">:</span>
+        <span style="color: #fb660a; font-weight: bold">assert</span> <span style="color: #ffffff">len(letter)</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">1</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># make letter lowercase</span>
+        <span style="color: #ffffff">letter</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">letter.lower()</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># if word contains the letter</span>
+        <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">letter</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">word:</span>
+            <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&quot;Correct. &quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">letter,</span> <span style="color: #0086d2">&quot; is in the word&quot;</span><span style="color: #ffffff">)</span>
+            <span style="color: #008800; font-style: italic; background-color: #0f140f"># add letter to guessed set</span>
+            <span style="color: #ffffff">guessedLetters.add(letter)</span>
+            <span style="color: #008800; font-style: italic; background-color: #0f140f"># replace letter in mutable version of word with a space</span>
+            <span style="color: #ffffff">word</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">word.replace(letter,</span> <span style="color: #0086d2">&quot; &quot;</span><span style="color: #ffffff">)</span>
+        <span style="color: #fb660a; font-weight: bold">else</span><span style="color: #ffffff">:</span>
+            <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&quot;Nope. Word either doesn&#39;t contain that letter, or you have&quot;</span><span style="color: #ffffff">,</span>
+                  <span style="color: #0086d2">&quot;already guessed it.&quot;</span><span style="color: #ffffff">)</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># prints remaining ammount of letters to guess</span>
+        <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&quot;left to guess: &quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">word.count(</span><span style="color: #0086d2">&#39; &#39;</span><span style="color: #ffffff">))</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># prints word status, for example: &quot;Int_rn_t&quot;</span>
+        <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&quot;guesses so far: &quot;</span><span style="color: #ffffff">)</span>
+        <span style="color: #fb660a; font-weight: bold">for</span> <span style="color: #ffffff">index,</span> <span style="color: #ffffff">char</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">enumerate(word):</span>
+            <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">char</span> <span style="color: #ffffff">==</span> <span style="color: #0086d2">&#39; &#39;</span><span style="color: #ffffff">:</span>
+                <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(WORD_PERMANENT[index],</span> <span style="color: #ffffff">end=</span><span style="color: #0086d2">&#39;&#39;</span><span style="color: #ffffff">)</span>
+            <span style="color: #fb660a; font-weight: bold">else</span><span style="color: #ffffff">:</span>
+                <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&#39;_&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">end=</span><span style="color: #0086d2">&#39;&#39;</span><span style="color: #ffffff">)</span>
+        <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&quot;\n&quot;</span><span style="color: #ffffff">)</span>
+        <span style="color: #008800; font-style: italic; background-color: #0f140f"># break case where all letters are guessed</span>
+        <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">word.count(</span><span style="color: #0086d2">&#39; &#39;</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">==</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">:</span>
+            <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&quot;Done. You have guessed the word: &quot;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">WORD_PERMANENT)</span>
+            <span style="color: #fb660a; font-weight: bold">break</span>
+    <span style="color: #fb660a; font-weight: bold">except</span> <span style="color: #ffffff">AssertionError:</span>
+        <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&quot;Input string must be of size 1\n\n&quot;</span><span style="color: #ffffff">)</span>
+</pre></div>
+
+    <br><br>
+    <h4>
+        Weather API Request
+    </h4>
+    <!-- HTML generated using hilite.me --><div style="background: #111111; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">json</span>
+<span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">requests</span>
+<span style="color: #fb660a; font-weight: bold">from</span> <span style="color: #ffffff">datetime</span> <span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">datetime</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">dt</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># pep8 compliant ;)</span>
+
+<span style="color: #ffffff">ZIP</span> <span style="color: #ffffff">=</span> <span style="color: #0086f7; font-weight: bold">30060</span>
+<span style="color: #ffffff">COUNTRY</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;us&#39;</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># gathering key from outside text file</span>
+<span style="color: #fb660a; font-weight: bold">with</span> <span style="color: #ffffff">open(</span><span style="color: #0086d2">&#39;key.txt&#39;</span><span style="color: #ffffff">,</span> <span style="color: #0086d2">&#39;r&#39;</span><span style="color: #ffffff">)</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">file:</span>
+    <span style="color: #ffffff">KEY</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">file.read()</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># creating url string for api request</span>
+<span style="color: #ffffff">apiString</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;https://api.openweathermap.org/data/2.5/weather?&#39;</span>
+<span style="color: #ffffff">apiString</span> <span style="color: #ffffff">+=</span> <span style="color: #0086d2">&#39;zip={},{}&amp;appid={}&#39;</span><span style="color: #ffffff">.format(ZIP,</span> <span style="color: #ffffff">COUNTRY,</span> <span style="color: #ffffff">KEY)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># storing API results in &#39;data&#39;</span>
+<span style="color: #ffffff">data</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">requests.get(apiString).json()</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># using datetime to gather time of report from unix timestamp</span>
+<span style="color: #ffffff">dtObj</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">dt.fromtimestamp(data[</span><span style="color: #0086d2">&#39;dt&#39;</span><span style="color: #ffffff">])</span>
+<span style="color: #ffffff">dtStr</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">dtObj.strftime(</span><span style="color: #0086d2">&#39;%Y-%m-%d %H:%M:%S&#39;</span><span style="color: #ffffff">)</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># creating a dictionary of all the necessary parts of the data</span>
+<span style="color: #ffffff">myDict</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">{</span><span style="color: #0086d2">&#39;Name&#39;</span><span style="color: #ffffff">:</span> <span style="color: #ffffff">data[</span><span style="color: #0086d2">&#39;name&#39;</span><span style="color: #ffffff">],</span>
+          <span style="color: #0086d2">&#39;Current Temperature&#39;</span><span style="color: #ffffff">:</span>
+          <span style="color: #ffffff">str(round(</span><span style="color: #0086f7; font-weight: bold">1.8</span> <span style="color: #ffffff">*</span> <span style="color: #ffffff">(float(data[</span><span style="color: #0086d2">&#39;main&#39;</span><span style="color: #ffffff">][</span><span style="color: #0086d2">&#39;temp&#39;</span><span style="color: #ffffff">])</span> <span style="color: #ffffff">-</span> <span style="color: #0086f7; font-weight: bold">273</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">+</span> <span style="color: #0086f7; font-weight: bold">32</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">))</span> <span style="color: #ffffff">+</span>
+          <span style="color: #0086d2">&#39; degrees Fahrenheit&#39;</span><span style="color: #ffffff">,</span>
+          <span style="color: #0086d2">&#39;Atmospheric Pressure&#39;</span><span style="color: #ffffff">:</span> <span style="color: #ffffff">str(round(data[</span><span style="color: #0086d2">&#39;main&#39;</span><span style="color: #ffffff">][</span><span style="color: #0086d2">&#39;pressure&#39;</span><span style="color: #ffffff">],</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">))</span> <span style="color: #ffffff">+</span>
+          <span style="color: #0086d2">&#39; hPa&#39;</span><span style="color: #ffffff">,</span>
+          <span style="color: #0086d2">&#39;Wind Speed&#39;</span><span style="color: #ffffff">:</span> <span style="color: #ffffff">str(data[</span><span style="color: #0086d2">&#39;wind&#39;</span><span style="color: #ffffff">][</span><span style="color: #0086d2">&#39;speed&#39;</span><span style="color: #ffffff">])</span> <span style="color: #ffffff">+</span> <span style="color: #0086d2">&#39; mph&#39;</span><span style="color: #ffffff">,</span>
+          <span style="color: #0086d2">&#39;Wind Direction&#39;</span><span style="color: #ffffff">:</span> <span style="color: #ffffff">data[</span><span style="color: #0086d2">&#39;wind&#39;</span><span style="color: #ffffff">][</span><span style="color: #0086d2">&#39;deg&#39;</span><span style="color: #ffffff">],</span>
+          <span style="color: #0086d2">&#39;Time of Report&#39;</span><span style="color: #ffffff">:</span> <span style="color: #ffffff">dtStr</span>
+          <span style="color: #ffffff">}</span>
+
+<span style="color: #008800; font-style: italic; background-color: #0f140f"># print each piece of the dictionary</span>
+<span style="color: #fb660a; font-weight: bold">for</span> <span style="color: #ffffff">k</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">myDict:</span>
+    <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(k.ljust(</span><span style="color: #0086f7; font-weight: bold">25</span><span style="color: #ffffff">)</span> <span style="color: #ffffff">+</span> <span style="color: #ffffff">str(myDict[k]))</span>
+</pre></div>
+<br><br>
+<h4>
+    Weather API Example Result
+</h4>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">
+    Name                     Marietta
+    Current Temperature      56.21 degrees Fahrenheit
+    Atmospheric Pressure     1020 hPa
+    Wind Speed               1.5 mph
+    Wind Direction           110
+    Time of Report           2020-02-18 13:04:19
+</pre></div>
+    
+    </body>
+    </html>

@@ -1,0 +1,84 @@
+<html>
+<head>
+    <title>
+        Carlos D. - Student Webpage - Assignment 2
+    </title>
+    <link rel="stylesheet" href="./../styles.css">
+</head>
+<body>
+    <div align="center">
+        <h2>
+            Carlos A. Diaz
+        </h2>
+        <h3>
+            <a href="./../index.html">Home</a>
+            <br><br>
+            <a href="./../AssignmentSplash.html">Assignments</a>
+            <br><br><br>
+            Assignment 2
+        </h3>
+        <button type="button" onclick="addCell()" id="add"      >Add Cell</button>
+        <button type="button" onclick="removeCell()" id="remove">Remove Cell</button>
+        <button type="button" onclick="sort()" id="sort"        >Sort</button>
+        <br><br>
+        <table>
+            <tr>
+                <td>
+                    Cells
+                </td>
+                <td>
+                    Length
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table id="cells">
+                        <tr>
+                            <td>
+                                <input type="text" id="defaultCell" placeholder="Empty :(" oninput="updateLength()">
+                            </td>
+                            <td>0</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+        </table>
+        <script>
+            function addCell(){
+                var row = document.getElementById("cells").childNodes[1].insertRow(0);
+                var input = row.insertCell(0);
+                var length = row.insertCell(1);
+                input.innerHTML="<input type='text' id='extraCell' placeholder='Empty :(' oninput='updateLength()'>"
+                length.innerHTML="0"
+            }
+            function removeCell(){
+                if(document.getElementById("cells").childNodes[1].children.length > 1){
+                    document.getElementById("cells").deleteRow(0)
+                }
+            }
+            function sort(){
+                table = document.getElementById("cells").childNodes[1].children
+                let arr = []
+                for(var row of table){
+                    arr.push(row.children[0].children[0].value)
+                }
+                arr.sort()
+                row = table[0]
+                for(var i = 0; i < table.length; i++){
+                    row.children[0].children[0].value = arr[i]
+                    row = table[i+1] 
+                }
+                updateLength()
+            }
+            function updateLength(){
+                for(var child=document.getElementById("cells").childNodes[1].firstChild; child !==null; child = child.nextSibling) {
+                    var cell = child.children[0].children[0]
+                    var length = child.children[1]
+                    length.innerHTML = cell.value.length
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,10 +1,12 @@
 <html>
+
 <head>
     <title>
         Carlos D. - Student Webpage - Assignment 4
     </title>
     <link rel="stylesheet" href="./../styles.css">
 </head>
+
 <body>
     <div align="center">
         <h2>
@@ -21,12 +23,151 @@
     <h4>
         Database Connection
     </h4>
-    <img src="../images/database.png">
+    <img src="../images/database.png" width="1200">
     <br><br>
     <h4>
         Socket
     </h4>
+    <div
+        style="background: #111111; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">socket</span>
+    <span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">logging</span>
+    <span style="color: #fb660a; font-weight: bold">from</span> <span style="color: #ffffff">polynomials</span> <span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">bisection,</span> <span style="color: #ffffff">evaluate</span>
+    <span style="color: #ffffff">logging.basicConfig(level=logging.INFO)</span>
     
     
-    </body>
-    </html>
+    <span style="color: #ffffff">port</span> <span style="color: #ffffff">=</span> <span style="color: #0086f7; font-weight: bold">12345</span>
+    <span style="color: #ffffff">listener</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">socket.socket()</span>
+    <span style="color: #ffffff">listener.bind((</span><span style="color: #0086d2">&#39;&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">port))</span>
+    <span style="color: #ffffff">listener.listen(</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">)</span>
+    
+    <span style="color: #fb660a; font-weight: bold">try</span><span style="color: #ffffff">:</span>
+        <span style="color: #fb660a; font-weight: bold">while</span> <span style="color: #ffffff">True:</span>
+            <span style="color: #ffffff">(sock,</span> <span style="color: #ffffff">address)</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">listener.accept()</span>
+            <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(address)</span>
+    
+            <span style="color: #ffffff">bytes</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">sock.recv(</span><span style="color: #0086f7; font-weight: bold">2048</span><span style="color: #ffffff">)</span>
+            <span style="color: #ffffff">client_data</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&quot;&quot;</span>
+            <span style="color: #fb660a; font-weight: bold">while</span> <span style="color: #ffffff">len(bytes)</span> <span style="color: #ffffff">&gt;</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">:</span>
+                <span style="color: #ffffff">client_data</span> <span style="color: #ffffff">+=</span> <span style="color: #ffffff">bytes.decode()</span>  <span style="color: #008800; font-style: italic; background-color: #0f140f"># UTF-8</span>
+                <span style="color: #ffffff">bytes</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">sock.recv(</span><span style="color: #0086f7; font-weight: bold">2048</span><span style="color: #ffffff">)</span>
+    
+            <span style="color: #ffffff">list_of_parts</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">client_data.split()</span>
+            <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">len(list_of_parts)</span> <span style="color: #ffffff">&lt;</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">:</span>
+                <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;XIncorrect number of parameters sent&#39;</span>
+            <span style="color: #fb660a; font-weight: bold">elif</span> <span style="color: #0086d2">&#39;E&#39;</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">list_of_parts[</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">][</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">]:</span>
+                <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">len(list_of_parts)</span> <span style="color: #ffffff">&lt;</span> <span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">:</span>
+                    <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;XToo few arguments&#39;</span>
+                <span style="color: #fb660a; font-weight: bold">else</span><span style="color: #ffffff">:</span>
+                    <span style="color: #fb660a; font-weight: bold">try</span><span style="color: #ffffff">:</span>
+                        <span style="color: #ffffff">result</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">evaluate(float(list_of_parts[</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">][</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">:]),</span> <span style="color: #ffffff">list(</span>
+                            <span style="color: #ffffff">map(float,</span> <span style="color: #ffffff">list_of_parts[</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">:])))</span>
+                        <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;E&#39;</span> <span style="color: #ffffff">+</span> <span style="color: #ffffff">str(result)</span>
+                    <span style="color: #fb660a; font-weight: bold">except</span><span style="color: #ffffff">:</span>
+                        <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;Xconversion or computation error&#39;</span>
+            <span style="color: #fb660a; font-weight: bold">elif</span> <span style="color: #0086d2">&#39;S&#39;</span> <span style="color: #ffffff">==</span> <span style="color: #ffffff">list_of_parts[</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">][</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">]:</span>
+                <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">len(list_of_parts)</span> <span style="color: #ffffff">&lt;</span> <span style="color: #0086f7; font-weight: bold">4</span><span style="color: #ffffff">:</span>
+                    <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;XToo few arguments&#39;</span>
+                <span style="color: #fb660a; font-weight: bold">else</span><span style="color: #ffffff">:</span>
+                    <span style="color: #fb660a; font-weight: bold">if</span> <span style="color: #ffffff">float(list_of_parts[-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">])</span> <span style="color: #ffffff">&lt;=</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">:</span>
+                        <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;Xinvalid tolerance&#39;</span>
+                    <span style="color: #fb660a; font-weight: bold">else</span><span style="color: #ffffff">:</span>
+                        <span style="color: #fb660a; font-weight: bold">try</span><span style="color: #ffffff">:</span>
+                            <span style="color: #ffffff">result</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">bisection(float(list_of_parts[</span><span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">][</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">:]),</span>
+                                               <span style="color: #ffffff">float(list_of_parts[</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">]),</span>
+                                               <span style="color: #ffffff">list(</span>
+                                                   <span style="color: #ffffff">map(float,</span>
+                                                       <span style="color: #ffffff">list_of_parts[</span><span style="color: #0086f7; font-weight: bold">2</span><span style="color: #ffffff">:-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">])),</span>
+                                               <span style="color: #ffffff">float(list_of_parts[-</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">]))</span>
+                            <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;S&#39;</span> <span style="color: #ffffff">+</span> <span style="color: #ffffff">str(result)</span>
+                        <span style="color: #fb660a; font-weight: bold">except</span><span style="color: #ffffff">:</span>
+                            <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;Xconversion or computation error&#39;</span>
+            <span style="color: #fb660a; font-weight: bold">else</span><span style="color: #ffffff">:</span>
+                <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&#39;XIncorrect command type&#39;</span>
+            <span style="color: #ffffff">logging.info(response+</span><span style="color: #0086d2">&quot;\n&quot;</span><span style="color: #ffffff">)</span>
+            <span style="color: #ffffff">response_byte</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">response.encode()</span>
+            <span style="color: #ffffff">sock.sendall(response_byte)</span>
+            <span style="color: #ffffff">sock.shutdown(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+    <span style="color: #fb660a; font-weight: bold">except</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">sock.close()</span>
+    <span style="color: #fb660a; font-weight: bold">finally</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">sock.close()</span>
+    </pre>
+    </div>
+    <br><br>
+    <h4>
+        Client
+    </h4>
+    <div
+        style="background: #111111; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">socket</span>
+    
+    <span style="color: #ffffff">requests</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">[</span><span style="color: #0086d2">&quot;E1.0 -945 1689 -950 230 -25 1&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;S0 2 -945 1689 -950 230 -25 1 1e-15&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;G4.1 0 0&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;4 1 0&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;E1.0&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;S1.0&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;S0 2 -945 1689 -950 230 -25 1 -1e-15&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;Not a number&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;S0 2 -945 1689 -950 230 -25 1 0&quot;</span><span style="color: #ffffff">,</span>
+                <span style="color: #0086d2">&quot;S0 2 -945 1689 -950 230 G 1 1e-15&quot;</span><span style="color: #ffffff">]</span>
+    
+    <span style="color: #fb660a; font-weight: bold">for</span> <span style="color: #ffffff">request</span> <span style="color: #ffffff">in</span> <span style="color: #ffffff">requests:</span>
+        <span style="color: #ffffff">sock</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">socket.socket()</span>
+        <span style="color: #ffffff">sock.connect((</span><span style="color: #0086d2">&#39;127.0.0.1&#39;</span><span style="color: #ffffff">,</span> <span style="color: #0086f7; font-weight: bold">12345</span><span style="color: #ffffff">))</span>
+        <span style="color: #ffffff">request_byte</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">request.encode()</span>
+        <span style="color: #ffffff">sock.sendall(request.encode())</span>
+        <span style="color: #ffffff">sock.shutdown(</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">bytes</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">sock.recv(</span><span style="color: #0086f7; font-weight: bold">2048</span><span style="color: #ffffff">)</span>
+        <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #0086d2">&quot;&quot;</span>
+        <span style="color: #fb660a; font-weight: bold">while</span> <span style="color: #ffffff">len(bytes)</span> <span style="color: #ffffff">&gt;</span> <span style="color: #0086f7; font-weight: bold">0</span><span style="color: #ffffff">:</span>
+            <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">bytes.decode()</span>
+            <span style="color: #ffffff">bytes</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">sock.recv(</span><span style="color: #0086f7; font-weight: bold">2048</span><span style="color: #ffffff">)</span>
+        <span style="color: #fb660a; font-weight: bold">print</span><span style="color: #ffffff">(</span><span style="color: #0086d2">&quot;Sending request: {}\nReceived response: {}\n\n&quot;</span><span style="color: #ffffff">.format(request,</span>
+                                                                      <span style="color: #ffffff">response))</span>
+        <span style="color: #ffffff">sock.close()</span>
+    </pre>
+    </div>
+    <br><br>
+    <h4>
+        Example Output
+    </h4>
+    <div
+        style="background: #eeeedd; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">carlos@tortuga:Socket Assignment&gt;py client.py 
+    Sending request: E1.0 -945 1689 -950 230 -25 1
+    Received response: E0.0
+    
+    Sending request: S0 2 -945 1689 -950 230 -25 1 1e-15
+    Received response: S1.0000000000000004
+    
+    Sending request: G4.1 0 0
+    Received response: XIncorrect command type
+    
+    Sending request: 4 1 0
+    Received response: XIncorrect command type
+    
+    Sending request: E1.0
+    Received response: XToo few arguments
+    
+    Sending request: S1.0
+    Received response: XToo few arguments
+    
+    Sending request: S0 2 -945 1689 -950 230 -25 1 -1e-15
+    Received response: Xinvalid tolerance
+    
+    Sending request: Not a number
+    Received response: XIncorrect command type
+    
+    Sending request: S0 2 -945 1689 -950 230 -25 1 0
+    Received response: Xinvalid tolerance
+    
+    Sending request: S0 2 -945 1689 -950 230 G 1 1e-15
+    Received response: Xconversion or computation error
+    </pre>
+    </div>
+
+</body>
+
+</html>

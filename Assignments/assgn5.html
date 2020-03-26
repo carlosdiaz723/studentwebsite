@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <title>
+        Carlos D. - Student Webpage - Assignment 5
+    </title>
+    <link rel="stylesheet" href="./../styles.css">
+</head>
+
+<body>
+    <div align="center">
+        <h2>
+            Carlos A. Diaz
+        </h2>
+        <h3>
+            <a href="./../index.html">Home</a>
+            <br><br>
+            <a href="./../AssignmentSplash.html">Assignments</a>
+            <br><br><br>
+            Assignment 5
+        </h3>
+    </div>
+    <h4>
+        Client Source
+    </h4>
+    <!-- HTML generated using hilite.me -->
+    <div
+        style="background: #111111; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%"><span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">sys</span>
+    <span style="color: #fb660a; font-weight: bold">import</span> <span style="color: #ffffff">requests</span>
+    
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># initialize vars</span>
+    <span style="color: #ffffff">webUrl,</span> <span style="color: #ffffff">outputPath</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">str(),</span> <span style="color: #ffffff">str()</span>
+    
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># try to store GET response</span>
+    <span style="color: #fb660a; font-weight: bold">try</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">webUrl,</span> <span style="color: #ffffff">outputPath</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">tuple(sys.argv[</span><span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">:</span><span style="color: #0086f7; font-weight: bold">3</span><span style="color: #ffffff">])</span>
+        <span style="color: #ffffff">response</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">requests.get(webUrl)</span>
+    <span style="color: #fb660a; font-weight: bold">except</span> <span style="color: #ffffff">requests.exceptions.MissingSchema</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">missingSchema:</span>
+        <span style="color: #ffffff">sys.exit(missingSchema)</span>
+    <span style="color: #fb660a; font-weight: bold">except</span> <span style="color: #ffffff">requests.exceptions.ConnectionError</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">connError:</span>
+        <span style="color: #ffffff">sys.exit(connError)</span>
+    <span style="color: #fb660a; font-weight: bold">except</span> <span style="color: #ffffff">ValueError</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">e:</span>
+        <span style="color: #ffffff">print(</span><span style="color: #0086d2">&#39;Arguments expected: 2\nArguments received:&#39;</span><span style="color: #ffffff">,</span> <span style="color: #ffffff">str(len(sys.argv)</span> <span style="color: #ffffff">-</span> <span style="color: #0086f7; font-weight: bold">1</span><span style="color: #ffffff">))</span>
+        <span style="color: #ffffff">print(</span><span style="color: #0086d2">&#39;Argument pattern: client.py \&quot;WEB_URL&gt;\&quot; \&quot;&lt;OUTPUT_FILE&gt;\&quot;&#39;</span><span style="color: #ffffff">)</span>
+    
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># try to see result as JSON and if not as text</span>
+    <span style="color: #fb660a; font-weight: bold">try</span><span style="color: #ffffff">:</span>
+        <span style="color: #ffffff">result</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">response.json()</span>
+    <span style="color: #fb660a; font-weight: bold">except</span> <span style="color: #ffffff">ValueError:</span>
+        <span style="color: #ffffff">result</span> <span style="color: #ffffff">=</span> <span style="color: #ffffff">response.text</span>
+    
+    <span style="color: #008800; font-style: italic; background-color: #0f140f"># write to output file</span>
+    <span style="color: #fb660a; font-weight: bold">with</span> <span style="color: #ffffff">open(outputPath,</span> <span style="color: #0086d2">&#39;w&#39;</span><span style="color: #ffffff">)</span> <span style="color: #fb660a; font-weight: bold">as</span> <span style="color: #ffffff">output:</span>
+        <span style="color: #ffffff">output.write(result)</span>
+    </pre>
+    </div>
+
+    <br><br>
+    <h4>
+        Terminal
+    </h4>
+    <!-- HTML generated using hilite.me -->
+    <div
+        style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">carlos@tortuga:five&gt;py client.py http://studentweb.kennesaw.edu/~cdiaz29 file.txt
+    </pre>
+    </div>
+
+    <br><br>
+    <h4>
+        Example Output (file.txt)
+    </h4>
+    <h5>
+        Since the url requested was for my homepage, file.txt will be the source HTML for my homepage.
+    </h5>
+    <!-- HTML generated using hilite.me -->
+    <div
+        style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;html&gt;</span>
+    <span style="color: #007700">&lt;head&gt;</span>
+        <span style="color: #007700">&lt;title&gt;</span>
+            Carlos D. - Student Webpage - Bio
+        <span style="color: #007700">&lt;/title&gt;</span>
+        <span style="color: #007700">&lt;link</span> <span style="color: #000077">rel=</span><span style="background-color: #e0e0ff">&quot;stylesheet&quot;</span> <span style="color: #000077">href=</span><span style="background-color: #e0e0ff">&quot;styles.css&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">&lt;/head&gt;</span>
+    <span style="color: #007700">&lt;body&gt;</span>
+        <span style="color: #007700">&lt;div</span> <span style="color: #000077">align=</span><span style="background-color: #e0e0ff">&quot;center&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;h2&gt;</span>
+                Carlos A. Diaz
+            <span style="color: #007700">&lt;/h2&gt;</span>
+            <span style="color: #007700">&lt;h3&gt;</span>
+                Student Website for CS4720 Internet Programming
+            <span style="color: #007700">&lt;/h3&gt;</span>
+            <span style="color: #007700">&lt;br&gt;</span>
+            <span style="color: #007700">&lt;img</span> <span style="color: #000077">src=</span><span style="background-color: #e0e0ff">&quot;images/clint_dc_cropped.JPEG&quot;</span> <span style="color: #000077">height=</span><span style="background-color: #e0e0ff">&quot;300px&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;h3&gt;</span>
+                Bio
+            <span style="color: #007700">&lt;/h3&gt;</span>
+            <span style="color: #007700">&lt;p&gt;</span>
+                I&#39;m Carlos, a junior computer science student with a minor in
+                mathematics. I was born in Cuba and have lived in Cuba, Miami, and
+                Georgia. In general my background is rooted in mathematics and
+                computing.
+                <span style="color: #007700">&lt;br&gt;&lt;br&gt;</span>
+                My first ever paid position was as a sophomore in high school
+                helping a Georgia Tech PHD student write an online textbook for the
+                AP Computer Science A course. From there I worked at Mathnasium as
+                an instructor teaching students of all ages, from 4 to mid 20&#39;s,
+                everything from counting to calculus. I had several IT and commerce
+                related internships throughout high school, but more recently I
+                intern at the United States Naval Observatory in Washington D.C.,
+                working on an API for the Astronomical Applications department.
+                Although I have knowledge and exposure to many other languages,
+                my hands on experience is mainly with Java, C++, and Python. 
+            <span style="color: #007700">&lt;/p&gt;</span>
+            <span style="color: #007700">&lt;p&gt;</span>
+                <span style="color: #007700">&lt;h3&gt;</span>
+                    <span style="color: #007700">&lt;a</span> <span style="color: #000077">href=</span><span style="background-color: #e0e0ff">&quot;AssignmentSplash.html&quot;</span><span style="color: #007700">&gt;</span>Assignments<span style="color: #007700">&lt;/a&gt;</span>
+                    <span style="color: #007700">&lt;br&gt;&lt;br&gt;</span>
+                    <span style="color: #007700">&lt;a</span> <span style="color: #000077">href=</span><span style="background-color: #e0e0ff">&quot;Photography.html&quot;</span><span style="color: #007700">&gt;</span>Amateur Photography<span style="color: #007700">&lt;/a&gt;</span>
+                    <span style="color: #007700">&lt;br&gt;&lt;br&gt;</span>
+                    <span style="color: #007700">&lt;a</span> <span style="color: #000077">href=</span><span style="background-color: #e0e0ff">&quot;Drone.html&quot;</span><span style="color: #007700">&gt;</span>FPV Freestyle<span style="color: #007700">&lt;/a&gt;</span>
+                    <span style="color: #007700">&lt;br&gt;&lt;br&gt;</span>
+                    <span style="color: #007700">&lt;a</span> <span style="color: #000077">href=</span><span style="background-color: #e0e0ff">&quot;Gaming.html&quot;</span><span style="color: #007700">&gt;</span>Gaming<span style="color: #007700">&lt;/a&gt;</span>
+                    <span style="color: #007700">&lt;br&gt;&lt;br&gt;</span>
+                    <span style="color: #007700">&lt;a</span> <span style="color: #000077">href=</span><span style="background-color: #e0e0ff">&quot;https://www.python.org/dev/peps/pep-0008/&quot;</span><span style="color: #007700">&gt;</span>le epic pycodestyle<span style="color: #007700">&lt;/a&gt;</span>
+                <span style="color: #007700">&lt;/h3&gt;</span>
+            <span style="color: #007700">&lt;/p&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+    <span style="color: #007700">&lt;/body&gt;</span>
+    <span style="color: #007700">&lt;/html&gt;</span>
+    </pre>
+    </div>
+
+
+
+
+</body>
+
+</html>
